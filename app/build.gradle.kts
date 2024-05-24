@@ -37,6 +37,7 @@ android {
 
 dependencies {
 
+    implementation (libs.rxjava)
     implementation(libs.rxkotlin)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
