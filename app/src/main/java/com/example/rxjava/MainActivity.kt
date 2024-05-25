@@ -107,7 +107,9 @@ class MainActivity : AppCompatActivity() {
     //RX Java intervals
     @SuppressLint("CheckResult")
     private fun intervals() {
+        // Put take() to stop when the first interval count = 1000    -> 999
         val intervals = Observable.interval(60, TimeUnit.MICROSECONDS)
+            .take(1000)//or u can use TimeUnit.MICROSECONDS or takeLast
 
         intervals.subscribe { t -> Log.i("TAG_INTERVAL", "onNext: $t") }
     }
