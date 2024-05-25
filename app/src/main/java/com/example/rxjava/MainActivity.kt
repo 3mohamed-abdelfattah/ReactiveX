@@ -26,10 +26,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        foo()
-        fooRx()
-        fromRX()
-        intervals()
+//        foo()
+//        fooRx()
+//        fromRX()
+//        intervals()
+        timer()
 
     }
 
@@ -104,7 +105,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //RX Java intervals
+    //RX Java intervals       & take
     @SuppressLint("CheckResult")
     private fun intervals() {
         // Put take() to stop when the first interval count = 1000    -> 999
@@ -112,6 +113,15 @@ class MainActivity : AppCompatActivity() {
             .take(1000)//or u can use TimeUnit.MICROSECONDS or takeLast
 
         intervals.subscribe { t -> Log.i("TAG_INTERVAL", "onNext: $t") }
+    }
+
+
+    // Use Timer Operator
+    @SuppressLint("CheckResult")
+    private fun timer() {
+        // TO Show onNext After 5 seconds and repeat it
+        val timer = Observable.timer(5, TimeUnit.SECONDS).repeat()
+        timer.subscribe { t -> Log.i("TAG_TIMER", "onNext: $t") }
     }
 
 }
