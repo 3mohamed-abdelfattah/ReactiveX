@@ -1,5 +1,6 @@
 package com.example.rxjava
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -49,28 +50,34 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    
     // Use RxJava
+    @SuppressLint("CheckResult")
     private fun fooRx() {
-        var fooRX = Observable.just(5,40,70,80,90,100)
-        val observer = object : Observer<Int>{
-            override fun onSubscribe(d: Disposable) {
-                Log.d("TAG_RX", "onSubscribe: ")
-            }
+        var fooRX = Observable.just(5, 40, 70, 80, 90, 100)
 
-            override fun onError(e: Throwable) {
-                Log.e("TAG_ERROR", "onError: $e", )
-            }
+//        val observer = object : Observer<Int>{
+//            override fun onSubscribe(d: Disposable) {
+//                Log.d("TAG_RX", "onSubscribe: ")
+//            }
+//
+//            override fun onError(e: Throwable) {
+//                Log.e("TAG_ERROR", "onError: $e", )
+//            }
+//
+//            override fun onComplete() {
+//                Log.d("TAG", "onComplete: ")
+//            }
+//
+//            override fun onNext(t: Int) {
+//                Log.i("TAG", "onNext: $t")
+//            }
+//        }
+//        fooRX.subscribe(observer)
 
-            override fun onComplete() {
-                Log.d("TAG", "onComplete: ")
-            }
 
-            override fun onNext(t: Int) {
-                Log.i("TAG", "onNext: $t")
-            }
-        }
-        fooRX.subscribe(observer)
+        //Enhance Code Use Lambda with Observable
+
+        fooRX.subscribe { t -> Log.i("TAG", "onNext: $t");Log.d("TAG", "onComplete: ") }
     }
 
 }
