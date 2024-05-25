@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         foo()
         fooRx()
+        fromRX()
 
     }
 
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
 
     // Use RxJava
+
     @SuppressLint("CheckResult")
     private fun fooRx() {
         var fooRX = Observable.just(5, 40, 70, 80, 90, 100)
@@ -78,6 +80,19 @@ class MainActivity : AppCompatActivity() {
         //Enhance Code Use Lambda with Observable
 
         fooRX.subscribe { t -> Log.i("TAG", "onNext: $t");Log.d("TAG", "onComplete: ") }
+    }
+
+
+    //RX Java from operator
+    @SuppressLint("CheckResult")
+    private fun fromRX() {
+        val fromRX = Observable.fromArray(2, 4, 6, 84, 56, 324, 634, 8, 0, 11)
+
+        fromRX.subscribe { t -> Log.i("TAG", "onNext: $t");Log.d("TAG", "onComplete: ") }
+        val list = listOf("A", "B", "C")
+        val fromList = Observable.fromIterable(list)
+        fromList.subscribe { t -> Log.i("TAG_LIST", "onNext: $t") }
+
     }
 
 }
