@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     private fun fooRx() {
-        var fooRX = Observable.just(5, 40, 70, 80, 90, 100)
+        val fooRX = Observable.just(5, 40, 70, 80, 90, 100)
 
 //        val observer = object : Observer<Int>{
 //            override fun onSubscribe(d: Disposable) {
@@ -90,8 +90,14 @@ class MainActivity : AppCompatActivity() {
 
         fromRX.subscribe { t -> Log.i("TAG", "onNext: $t");Log.d("TAG", "onComplete: ") }
         val list = listOf("A", "B", "C")
-        val fromList = Observable.fromIterable(list)
+        // To use repeat operator
+        val fromList = Observable.fromIterable(list).repeat(2)
+        // To use range operator
+        val fromList2 = Observable.range(1, 50)
+
         fromList.subscribe { t -> Log.i("TAG_LIST", "onNext: $t") }
+        fromList2.subscribe { t -> Log.i("TAG_LIST", "onNext: $t") }
+
 
     }
 
