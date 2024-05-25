@@ -11,6 +11,7 @@ import com.example.rxjava.databinding.ActivityMainBinding
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         foo()
         fooRx()
         fromRX()
+        intervals()
 
     }
 
@@ -99,6 +101,15 @@ class MainActivity : AppCompatActivity() {
         fromList2.subscribe { t -> Log.i("TAG_LIST", "onNext: $t") }
 
 
+    }
+
+
+    //RX Java intervals
+    @SuppressLint("CheckResult")
+    private fun intervals() {
+        val intervals = Observable.interval(60, TimeUnit.MICROSECONDS)
+
+        intervals.subscribe { t -> Log.i("TAG_INTERVAL", "onNext: $t") }
     }
 
 }
