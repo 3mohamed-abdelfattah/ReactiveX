@@ -33,7 +33,8 @@ class MainActivity : AppCompatActivity() {
 //        timer()
 //        distinct()
 //        buffer()
-        map()
+//        map()
+        concat()
     }
 
 
@@ -152,5 +153,17 @@ class MainActivity : AppCompatActivity() {
         val map = Observable.range(1, 20).map { it * 2 }
         map.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
     }
+
+
+    // Use Concat Operator to return other Observables without interleaved
+    @SuppressLint("CheckResult")
+    private fun concat() {
+        val sumObservable = Observable.interval(3, TimeUnit.MILLISECONDS).take(10).map { it + 2 }
+        val concat = Observable.interval(3, TimeUnit.SECONDS).take(10).map { it * 2 }
+            .concatWith(sumObservable)
+
+        concat.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
+    }
+
 
 }
