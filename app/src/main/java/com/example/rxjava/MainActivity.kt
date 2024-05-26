@@ -31,8 +31,10 @@ class MainActivity : AppCompatActivity() {
 //        fromRX()
 //        intervals()
 //        timer()
-        distinct()
+//        distinct()
+        buffer()
     }
+
 
     // Normal assign variables
     private fun foo() {
@@ -131,6 +133,15 @@ class MainActivity : AppCompatActivity() {
         val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 10)
         val distinct = Observable.fromIterable(list).distinct()
         distinct.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
+    }
+
+
+    // Use Buffer Operator to put every 4 elements in list
+    @SuppressLint("CheckResult")
+    private fun buffer() {
+        val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 10)
+        val buffer = Observable.fromIterable(list).distinct().buffer(4)
+        buffer.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
     }
 
 }
