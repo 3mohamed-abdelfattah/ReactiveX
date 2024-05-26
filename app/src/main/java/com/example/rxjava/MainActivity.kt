@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 //        intervals()
 //        timer()
 //        distinct()
-        buffer()
+//        buffer()
+        map()
     }
 
 
@@ -142,6 +143,14 @@ class MainActivity : AppCompatActivity() {
         val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 10)
         val buffer = Observable.fromIterable(list).distinct().buffer(4)
         buffer.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
+    }
+
+
+    // Use MAp Operator to change the value like we want
+    @SuppressLint("CheckResult")
+    private fun map() {
+        val map = Observable.range(1, 20).map { it * 2 }
+        map.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
     }
 
 }
