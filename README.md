@@ -1,6 +1,20 @@
-https://reactivex.io/
-https://github.com/ReactiveX
+# ReactiveX
 
+[![ReactiveX](https://github.com/3mohamed-abdelfattah/ReactiveX/assets/142848460/5993973f-2c98-42a1-bb4c-747188e8cd4d)](https://reactivex.io/)
 
+## About ReactiveX
 
-![WhatsApp Image 2024-05-24 at 22 43 10_513c2613](https://github.com/3mohamed-abdelfattah/ReactiveX/assets/142848460/5993973f-2c98-42a1-bb4c-747188e8cd4d)
+ReactiveX is a combination of the best ideas from the Observer pattern, the Iterator pattern, and functional programming.
+
+- Official website: [reactivex.io](https://reactivex.io/)
+- GitHub repository: [ReactiveX on GitHub](https://github.com/ReactiveX)
+
+ReactiveX is a library for composing asynchronous and event-based programs using observable sequences for the .NET platform, JavaScript, and more.
+
+## Getting Started
+
+To get started with ReactiveX, visit the [documentation](https://reactivex.io/documentation).
+
+## Contributing
+
+If you wish to contribute to ReactiveX, check out the [contributing guidelines](https://github.com/ReactiveX/RxJava/blob/3.x/CONTRIBUTING.md) on GitHub.
