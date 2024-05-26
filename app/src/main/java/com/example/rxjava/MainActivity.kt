@@ -11,6 +11,7 @@ import com.example.rxjava.databinding.ActivityMainBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.merge
@@ -18,6 +19,8 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    lateinit var mDisposable: Disposable
+    lateinit var compositeDisposable: CompositeDisposable
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -175,15 +178,15 @@ class MainActivity : AppCompatActivity() {
         val sumObservable = Observable.interval(3, TimeUnit.MILLISECONDS).take(10).map { it + 2 }
         val merge = Observable.interval(3, TimeUnit.SECONDS).take(10).map { it * 2 }
             .mergeWith(sumObservable)
+        compositeDisposable.add(merge.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") })
 
-        merge.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
     }
 
 
     // Switch between different threads
     @SuppressLint("CheckResult")
     private fun schedulers() {
-        val schedulers = Observable.range(1, 20)
+        val schedulers = Observable.range(1, 200)
         // IO for simple long operations
         // Computation for Complicated operations (need CPU)
 
@@ -195,6 +198,12 @@ class MainActivity : AppCompatActivity() {
         schedulers.subscribe() { t ->
             Log.i("TAG", "$t - ${Thread.currentThread().name}")
         }
+    }
+
+
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+        super.onDestroy()
     }
 
 
