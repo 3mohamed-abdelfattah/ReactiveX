@@ -8,9 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.rxjava.databinding.ActivityMainBinding
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.merge
 import java.util.concurrent.TimeUnit
 
@@ -36,7 +39,8 @@ class MainActivity : AppCompatActivity() {
 //        buffer()
 //        map()
 //        concat()
-        merge()
+//        merge()
+        schedulers()
     }
 
 
@@ -175,6 +179,24 @@ class MainActivity : AppCompatActivity() {
             .mergeWith(sumObservable)
 
         merge.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
+    }
+
+
+    // Switch between different threads
+    @SuppressLint("CheckResult")
+    private fun schedulers() {
+        val schedulers = Observable.range(1, 20)
+        // IO for simple long operations
+        // Computation for Complicated operations (need CPU)
+
+        //subscribeOn Stay on same thread
+        //observeOn go to another thread
+
+        schedulers.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+
+        schedulers.subscribe() { t ->
+            Log.i("TAG_DISTINCT", "$t - ${Thread.currentThread().name}")
+        }
     }
 
 
