@@ -11,6 +11,7 @@ import com.example.rxjava.databinding.ActivityMainBinding
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
+import kotlinx.coroutines.flow.merge
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +35,8 @@ class MainActivity : AppCompatActivity() {
 //        distinct()
 //        buffer()
 //        map()
-        concat()
+//        concat()
+        merge()
     }
 
 
@@ -155,7 +157,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    // Use Concat Operator to return other Observables without interleaved
+    // Use Concat Operator to return other Observables without interleaved (Link between Observables)
     @SuppressLint("CheckResult")
     private fun concat() {
         val sumObservable = Observable.interval(3, TimeUnit.MILLISECONDS).take(10).map { it + 2 }
@@ -163,6 +165,16 @@ class MainActivity : AppCompatActivity() {
             .concatWith(sumObservable)
 
         concat.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
+    }
+
+    // Use Merge operator to merge between Observables without waiting
+    @SuppressLint("CheckResult")
+    private fun merge() {
+        val sumObservable = Observable.interval(3, TimeUnit.MILLISECONDS).take(10).map { it + 2 }
+        val merge = Observable.interval(3, TimeUnit.SECONDS).take(10).map { it * 2 }
+            .mergeWith(sumObservable)
+
+        merge.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
     }
 
 
