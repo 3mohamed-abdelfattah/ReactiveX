@@ -8,9 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.rxjava.databinding.ActivityMainBinding
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.merge
 import java.util.concurrent.TimeUnit
 
@@ -178,7 +180,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     // Switch between different threads
     @SuppressLint("CheckResult")
     private fun schedulers() {
@@ -192,7 +193,7 @@ class MainActivity : AppCompatActivity() {
         schedulers.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 
         schedulers.subscribe() { t ->
-            Log.i("TAG_DISTINCT", "$t - ${Thread.currentThread().name}")
+            Log.i("TAG", "$t - ${Thread.currentThread().name}")
         }
     }
 
