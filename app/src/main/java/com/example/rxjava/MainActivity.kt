@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 //        fooRx()
 //        fromRX()
 //        intervals()
-        timer()
-
+//        timer()
+        distinct()
     }
 
     // Normal assign variables
@@ -122,6 +122,15 @@ class MainActivity : AppCompatActivity() {
         // TO Show onNext After 5 seconds and repeat it
         val timer = Observable.timer(5, TimeUnit.SECONDS).repeat()
         timer.subscribe { t -> Log.i("TAG_TIMER", "onNext: $t") }
+    }
+
+
+    // Use Distinct Operator to remove repeated values
+    @SuppressLint("CheckResult")
+    private fun distinct() {
+        val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 10)
+        val distinct = Observable.fromIterable(list).distinct()
+        distinct.subscribe() { t -> Log.i("TAG_DISTINCT", "$t") }
     }
 
 }
