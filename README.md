@@ -4,6 +4,9 @@
 
 ![Types](https://github.com/3mohamed-abdelfattah/ReactiveX/assets/142848460/8cf172ee-7232-4a63-99c9-4f50ad22702f)
 
+![Types Observer](https://github.com/3mohamed-abdelfattah/ReactiveX/assets/142848460/5127a027-a68a-4f5b-8f5a-1381b98d4f1f)
+
+
 
 ## About ReactiveX
 
