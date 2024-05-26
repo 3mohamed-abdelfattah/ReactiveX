@@ -2,6 +2,9 @@
 
 [![ReactiveX](https://github.com/3mohamed-abdelfattah/ReactiveX/assets/142848460/5993973f-2c98-42a1-bb4c-747188e8cd4d)](https://reactivex.io/)
 
+![Types](https://github.com/3mohamed-abdelfattah/ReactiveX/assets/142848460/8cf172ee-7232-4a63-99c9-4f50ad22702f)
+
+
 ## About ReactiveX
 
 ReactiveX is a combination of the best ideas from the Observer pattern, the Iterator pattern, and functional programming.
