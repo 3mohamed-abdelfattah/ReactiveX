@@ -171,13 +171,15 @@ class MainActivity2 : AppCompatActivity() {
     // Cold Observables
     @SuppressLint("CheckResult")
     private fun cold() {
-        val cold = Observable.interval(1, TimeUnit.SECONDS).take(50)
+        //Convert Cold to Hot observable use publish() and connect()
+        val cold = Observable.interval(1, TimeUnit.SECONDS).take(50).publish()
+        // Hot order the items
+        cold.connect()
         cold.subscribe { t -> Log.i("TAG", "First: $t") }
 
         Thread.sleep(3500)
         cold.subscribe { t -> Log.i("TAG", "Second: $t") }
     }
-
 
 
 }
