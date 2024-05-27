@@ -21,6 +21,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 class MainActivity2 : AppCompatActivity() {
@@ -40,7 +41,8 @@ class MainActivity2 : AppCompatActivity() {
 //        single()
 //        maybe()
 //        flowable()
-        cold()
+//        cold()
+        subject()
     }
 
     @SuppressLint("CheckResult")
@@ -179,6 +181,24 @@ class MainActivity2 : AppCompatActivity() {
 
         Thread.sleep(3500)
         cold.subscribe { t -> Log.i("TAG", "Second: $t") }
+    }
+
+
+    // Publish Subject
+    @SuppressLint("CheckResult")
+    private fun subject() {
+        val observable = Observable.interval(1, TimeUnit.SECONDS).take(50)
+        val subject = PublishSubject.create<Long>()
+        observable.subscribe(subject)
+        Thread.sleep(3000)
+        subject.subscribe(
+            {
+                Log.d("TAG", "subject: $it")
+            },
+            {
+                Log.d("TAG", "error: ${it?.message}")
+            }
+        )
     }
 
 
