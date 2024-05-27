@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doOnTextChanged
 import com.example.rxjava.databinding.ActivityMain2Binding
+import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.CompletableObserver
 import io.reactivex.rxjava3.core.Flowable
@@ -150,8 +151,17 @@ class MainActivity2 : AppCompatActivity() {
                     "Complete"
                 )
             }
+
         )
 
+    }
+
+
+    // Convert observable to flowable
+    @SuppressLint("CheckResult")
+    private fun fooRx() {
+        val fooRX = Observable.just(5, 40, 70, 80, 90, 100)
+        fooRX.toFlowable(BackpressureStrategy.BUFFER).subscribe { t -> Log.i("TAG", "onNext: $t");Log.d("TAG", "onComplete: ") }
     }
 
 
