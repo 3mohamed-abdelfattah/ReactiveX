@@ -17,6 +17,25 @@ ReactiveX is a combination of the best ideas from the Observer pattern, the Iter
 
 ReactiveX is a library for composing asynchronous and event-based programs using observable sequences for the .NET platform, JavaScript, and more.
 
+
+## Dependencies
+
+Add the following dependency to your `build.gradle` file:
+
+```gradle
+dependencies {
+    implementation("io.reactivex.rxjava3:rxjava:3.x.y")
+}
+```
+
+
+```gradle
+dependencies {
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
+}
+```
+
+
 ## Getting Started
 
 To get started with ReactiveX, visit the [documentation](https://reactivex.io/documentation).
