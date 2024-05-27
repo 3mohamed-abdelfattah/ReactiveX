@@ -21,6 +21,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class MainActivity2 : AppCompatActivity() {
 
@@ -38,7 +39,8 @@ class MainActivity2 : AppCompatActivity() {
 
 //        single()
 //        maybe()
-        flowable()
+//        flowable()
+        cold()
     }
 
     @SuppressLint("CheckResult")
@@ -161,7 +163,19 @@ class MainActivity2 : AppCompatActivity() {
     @SuppressLint("CheckResult")
     private fun fooRx() {
         val fooRX = Observable.just(5, 40, 70, 80, 90, 100)
-        fooRX.toFlowable(BackpressureStrategy.BUFFER).subscribe { t -> Log.i("TAG", "onNext: $t");Log.d("TAG", "onComplete: ") }
+        fooRX.toFlowable(BackpressureStrategy.BUFFER)
+            .subscribe { t -> Log.i("TAG", "onNext: $t");Log.d("TAG", "onComplete: ") }
+    }
+
+
+    // Cold Observables
+    @SuppressLint("CheckResult")
+    private fun cold() {
+        val cold = Observable.interval(1, TimeUnit.SECONDS).take(50)
+        cold.subscribe { t -> Log.i("TAG", "First: $t") }
+
+        Thread.sleep(3500)
+        cold.subscribe { t -> Log.i("TAG", "Second: $t") }
     }
 
 
