@@ -12,12 +12,14 @@ import androidx.core.widget.doOnTextChanged
 import com.example.rxjava.databinding.ActivityMain2Binding
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.CompletableObserver
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.MaybeObserver
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MainActivity2 : AppCompatActivity() {
 
@@ -34,7 +36,8 @@ class MainActivity2 : AppCompatActivity() {
         }
 
 //        single()
-        maybe()
+//        maybe()
+        flowable()
     }
 
     @SuppressLint("CheckResult")
@@ -89,7 +92,6 @@ class MainActivity2 : AppCompatActivity() {
     @SuppressLint("CheckResult")
     private fun maybe() {
 
-        // Use Completable
         val maybe = Maybe.create<String> { emitter ->
             binding.editText.doOnTextChanged { text, start, before, count ->
                 when (text.toString()) {
@@ -120,6 +122,35 @@ class MainActivity2 : AppCompatActivity() {
 
         })
 
+    }
+
+
+    //Use Flowable
+    @SuppressLint("CheckResult")
+    private fun flowable() {
+
+        val flowable = Flowable.range(1, 100)
+        // You can use onBackpressureDrop() or onBackpressureLatest() or onBackpressureBuffer()
+        flowable.onBackpressureBuffer().observeOn(Schedulers.io(), false, 5).subscribe(
+            { t ->
+                Log.d(
+                    "TAG",
+                    "flowable: $t"
+                )
+            },
+            { e ->
+                Log.d(
+                    "TAG",
+                    "error: $e"
+                )
+            },
+            {
+                Log.d(
+                    "TAG",
+                    "Complete"
+                )
+            }
+        )
 
     }
 
